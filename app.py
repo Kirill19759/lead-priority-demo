@@ -41,9 +41,11 @@ except Exception as exc:
     st.error(str(exc))
     st.stop()
 
-left, right = st.columns(2)
-left.metric("Высокий приоритет", int((ranked["priority_group"] == "высокий").sum()))
-right.metric("Средняя оценка", f"{ranked['priority_score'].mean():.2f}")
+c1, c2, c3, c4 = st.columns(4)
+c1.metric("Высокий", int((ranked["priority_group"] == "высокий").sum()))
+c2.metric("Средний", int((ranked["priority_group"] == "средний").sum()))
+c3.metric("Низкий", int((ranked["priority_group"] == "низкий").sum()))
+c4.metric("Средняя оценка", f"{ranked['priority_score'].mean():.2f}")
 
 st.dataframe(ranked.head(30), use_container_width=True)
 st.download_button(
