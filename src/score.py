@@ -26,7 +26,7 @@ def score_frame(df: pd.DataFrame) -> pd.DataFrame:
     out["priority_score"] = bundle["pipeline"].predict_proba(x)[:, 1]
     out["priority_group"] = pd.cut(
         out["priority_score"],
-        bins=[-0.01, 0.15, 0.30, 1.0],
+        bins=[-0.01, 0.40, 0.60, 1.01],
         labels=["низкий", "средний", "высокий"],
     )
     return out.sort_values("priority_score", ascending=False).reset_index(drop=True)
